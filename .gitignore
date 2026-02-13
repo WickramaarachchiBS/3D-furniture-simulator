@@ -49,3 +49,7 @@ test-results/
 
 # Optional: if using eslint cache
 .eslintcache
+
+# md files exept README.md
+*.md
+!README.md
