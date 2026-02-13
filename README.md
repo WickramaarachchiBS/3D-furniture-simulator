@@ -1,73 +1,143 @@
-# React + TypeScript + Vite
+# HCI - Interactive 3D Design Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web-based 3D design application built with React, Three.js, and TypeScript. This application allows users to create, customize, and export 3D designs in an interactive environment.
 
-Currently, two official plugins are available:
+## 🌟 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **3D Design Interface** - Interactive 3D canvas powered by Three.js and React Three Fiber
+- **User Authentication** - Secure login system with protected routes
+- **Design Customization** - Real-time color picking and object manipulation
+- **Export Functionality** - Save and export your 3D designs
+- **State Management** - Efficient state handling with Zustand
+- **Responsive Design** - Built with Tailwind CSS for a modern, responsive UI
+- **TypeScript** - Full type safety throughout the application
 
-## React Compiler
+## 🚀 Live Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Visit the live application: 
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend Framework**: React 18.3.1
+- **3D Graphics**: Three.js, React Three Fiber, React Three Drei
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Routing**: React Router DOM v7.6.0
+- **State Management**: Zustand 4.5.2
+- **Color Picker**: React Colorful
+- **Icons**: Lucide React
+- **Build Tool**: Vite 5.4.2
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone the repository:
+```bash
+git clone 
+cd HCI
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+npm install
 ```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+4. Open your browser and navigate to the local development URL (typically `http://localhost:5173`)
+
+## 📜 Available Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build the application for production
+- `npm run preview` - Preview the production build locally
+- `npm run lint` - Run ESLint to check code quality
+- `npm run deploy` - Deploy to GitHub Pages
+
+## 🏗️ Project Structure
+
+```
+HCI/
+├── src/
+│   ├── components/     # Reusable React components
+│   ├── pages/          # Page components (Landing, Login, Designer)
+│   ├── store/          # State management (Zustand stores, Auth/State providers)
+│   ├── data/           # Static data and configurations
+│   ├── types.ts        # TypeScript type definitions
+│   ├── App.tsx         # Main application component with routing
+│   ├── main.tsx        # Application entry point
+│   └── index.css       # Global styles
+├── public/             # Static assets
+├── index.html          # HTML template
+└── package.json        # Project dependencies and scripts
+```
+
+## 🔐 Authentication
+
+The application includes a protected route system:
+- **Landing Page** (`/`) - Publicly accessible home page
+- **Login Page** (`/login`) - User authentication
+- **Designer Page** (`/designer`) - Protected route requiring authentication
+
+## 🎨 Key Dependencies
+
+### Production
+- `@react-three/fiber` - React renderer for Three.js
+- `@react-three/drei` - Useful helpers for React Three Fiber
+- `three` - 3D graphics library
+- `react-colorful` - Color picker component
+- `file-saver` - File export functionality
+- `uuid` - Unique ID generation
+- `zustand` - State management
+
+### Development
+- `@vitejs/plugin-react` - React plugin for Vite
+- `tailwindcss` - Utility-first CSS framework
+- `typescript` - Type checking
+- `eslint` - Code linting
+- `gh-pages` - GitHub Pages deployment
+
+## 🚀 Deployment
+
+This project is configured for deployment to GitHub Pages:
+
+```bash
+npm run deploy
+```
+
+The `predeploy` script automatically builds the project before deployment.
+
+## 📝 Configuration Files
+
+- `vite.config.ts` - Vite configuration
+- `tsconfig.json` - TypeScript configuration
+- `tailwind.config.js` - Tailwind CSS configuration
+- `eslint.config.js` - ESLint rules
+- `postcss.config.js` - PostCSS configuration
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is available for use under standard open source practices.
+
+## 👨‍💻 Author
+
+
+## 🙏 Acknowledgments
+
+- React Three Fiber community
+- Three.js documentation
+- All open source contributors
+
+---
+
+**Note**: This is an HCI (Human-Computer Interaction) project demonstrating modern web-based 3D design interfaces.
