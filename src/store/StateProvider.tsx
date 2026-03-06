@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { defaultFurniture } from '../data/defaultFurniture';
-import { RoomLayout, Furniture, ViewMode, Room } from '../types';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { defaultFurniture } from "../data/defaultFurniture";
+import type { RoomLayout, Furniture, ViewMode, Room } from "../types";
 
 interface StateContextType {
   viewMode: ViewMode;
@@ -12,7 +12,10 @@ interface StateContextType {
   selectedFurnitureId: string | null;
   selectFurniture: (id: string | null) => void;
   addFurniture: (type: string) => void;
-  updateFurniture: (id: string, updates: Partial<Omit<Furniture, 'id' | 'type'>>) => void;
+  updateFurniture: (
+    id: string,
+    updates: Partial<Omit<Furniture, "id" | "type">>,
+  ) => void;
   deleteFurniture: (id: string) => void;
   savedLayouts: RoomLayout[];
   currentLayoutId: string | null;
@@ -25,39 +28,43 @@ const defaultRoom: Room = {
   width: 400,
   length: 600,
   height: 250,
-  wallColor: '#f5f5f5',
-  floorColor: '#e0e0e0',
-  wallOpacity: 0.4
+  wallColor: "#f5f5f5",
+  floorColor: "#e0e0e0",
+  wallOpacity: 0.4,
 };
 
 const StateContext = createContext<StateContextType | undefined>(undefined);
 
-export const StateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [viewMode, setViewMode] = useState<ViewMode>('3D');
+export const StateProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [viewMode, setViewMode] = useState<ViewMode>("3D");
   const [room, setRoom] = useState<Room>(defaultRoom);
   const [furniture, setFurniture] = useState<Furniture[]>([]);
-  const [selectedFurnitureId, setSelectedFurnitureId] = useState<string | null>(null);
+  const [selectedFurnitureId, setSelectedFurnitureId] = useState<string | null>(
+    null,
+  );
   const [savedLayouts, setSavedLayouts] = useState<RoomLayout[]>([]);
   const [currentLayoutId, setCurrentLayoutId] = useState<string | null>(null);
 
   useEffect(() => {
-    const savedLayoutsStr = localStorage.getItem('roomLayouts');
+    const savedLayoutsStr = localStorage.getItem("roomLayouts");
     if (savedLayoutsStr) {
       try {
         const layouts = JSON.parse(savedLayoutsStr);
         setSavedLayouts(layouts);
       } catch (error) {
-        console.error('Failed to parse saved layouts:', error);
+        console.error("Failed to parse saved layouts:", error);
       }
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('roomLayouts', JSON.stringify(savedLayouts));
+    localStorage.setItem("roomLayouts", JSON.stringify(savedLayouts));
   }, [savedLayouts]);
 
   const updateRoom = (updates: Partial<Room>) => {
-    setRoom(prev => ({ ...prev, ...updates }));
+    setRoom((prev) => ({ ...prev, ...updates }));
   };
 
   const selectFurniture = (id: string | null) => {
@@ -65,8 +72,8 @@ export const StateProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const addFurniture = (type: string) => {
-    const templateFurniture = defaultFurniture.find(f => f.type === type);
-    
+    const templateFurniture = defaultFurniture.find((f) => f.type === type);
+
     if (!templateFurniture) return;
 
     const newFurniture: Furniture = {
@@ -75,27 +82,28 @@ export const StateProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       position: {
         x: 0,
         y: 0,
-        z: 0
+        z: 0,
       },
       rotation: { y: 0 },
       scale: { ...templateFurniture.defaultScale },
-      color: templateFurniture.defaultColor
+      color: templateFurniture.defaultColor,
     };
-    
-    setFurniture(prev => [...prev, newFurniture]);
+
+    setFurniture((prev) => [...prev, newFurniture]);
     setSelectedFurnitureId(newFurniture.id);
   };
 
-  const updateFurniture = (id: string, updates: Partial<Omit<Furniture, 'id' | 'type'>>) => {
-    setFurniture(prev => 
-      prev.map(item => 
-        item.id === id ? { ...item, ...updates } : item
-      )
+  const updateFurniture = (
+    id: string,
+    updates: Partial<Omit<Furniture, "id" | "type">>,
+  ) => {
+    setFurniture((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, ...updates } : item)),
     );
   };
 
   const deleteFurniture = (id: string) => {
-    setFurniture(prev => prev.filter(item => item.id !== id));
+    setFurniture((prev) => prev.filter((item) => item.id !== id));
     if (selectedFurnitureId === id) {
       setSelectedFurnitureId(null);
     }
@@ -108,24 +116,27 @@ export const StateProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       name: `${name} (${new Date().toLocaleTimeString()})`,
       createdAt: new Date().toISOString(),
       room: { ...room },
-      furniture: [...furniture]
+      furniture: [...furniture],
     };
 
-    setSavedLayouts(prev => {
+    setSavedLayouts((prev) => {
       const newLayouts = [...prev, layout];
       if (newLayouts.length > 15) {
         return newLayouts
-          .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+          .sort(
+            (a, b) =>
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+          )
           .slice(1);
       }
       return newLayouts;
     });
-    
+
     setCurrentLayoutId(newLayoutId);
   };
 
   const loadLayout = (id: string) => {
-    const layout = savedLayouts.find(l => l.id === id);
+    const layout = savedLayouts.find((l) => l.id === id);
     if (layout) {
       setRoom(layout.room);
       setFurniture(layout.furniture);
@@ -134,7 +145,7 @@ export const StateProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const deleteLayout = (id: string) => {
-    setSavedLayouts(prev => prev.filter(l => l.id !== id));
+    setSavedLayouts((prev) => prev.filter((l) => l.id !== id));
     if (currentLayoutId === id) {
       setCurrentLayoutId(null);
     }
@@ -155,20 +166,18 @@ export const StateProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     currentLayoutId,
     saveCurrentLayout,
     loadLayout,
-    deleteLayout
+    deleteLayout,
   };
 
   return (
-    <StateContext.Provider value={value}>
-      {children}
-    </StateContext.Provider>
+    <StateContext.Provider value={value}>{children}</StateContext.Provider>
   );
 };
 
 export const useAppState = () => {
   const context = useContext(StateContext);
   if (context === undefined) {
-    throw new Error('useAppState must be used within a StateProvider');
+    throw new Error("useAppState must be used within a StateProvider");
   }
   return context;
 };
