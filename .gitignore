@@ -1,23 +1,38 @@
-# Node dependencies
+# Dependencies
 node_modules/
 
-# Vite cache
+# Build output
 dist/
-.vite/
+dist-ssr/
 
-# Environment files
+# Vite cache & temp files
+.vite/
+vite.config.ts.timestamp-*
+
+# Environment files (Vite loads these)
 .env
+.env.local
 .env.*.local
 
-# System files
-.DS_Store
-Thumbs.db
+# TypeScript build info
+*.tsbuildinfo
 
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.log
+
+# ESLint & Prettier caches
+.eslintcache
+.prettiercache
+
+# Coverage & testing
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
 
 # IDEs and editors
 .vscode/
@@ -26,30 +41,13 @@ pnpm-debug.log*
 *.ntvs*
 *.njsproj
 *.sln
+*.sw?
 
-# Storybook
-storybook-static/
-.out/
-.cache/
-.nyc_output/
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# Testing
-coverage/
-playwright-report/
-test-results/
-
-# Mac-specific
-*.swp
-
-# Optional: for Prettier
-.prettiercache
-
-# Optional: if using TypeScript
-*.tsbuildinfo
-
-# Optional: if using eslint cache
-.eslintcache
-
-# md files exept README.md
+# md files except README.md
 *.md
 !README.md
