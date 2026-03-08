@@ -42,11 +42,11 @@ export const Navbar: React.FC = () => {
             className="flex items-center gap-2 group"
             onClick={() => setMenuOpen(false)}
           >
-            <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shadow-md group-hover:bg-blue-700 transition-colors">
+            <div className="w-9 h-9 bg-cyan-600 rounded-xl flex items-center justify-center shadow-md group-hover:bg-cyan-700 transition-colors">
               <Sofa className="w-5 h-5 text-white" />
             </div>
             <span
-              className={`text-xl font-bold tracking-tight transition-colors ${
+              className={`text-xl font-bold font-logo tracking-tight transition-colors ${
                 scrolled || menuOpen ? "text-gray-900" : "text-gray-900"
               }`}
             >
@@ -64,8 +64,8 @@ export const Navbar: React.FC = () => {
                 className={({ isActive }) =>
                   `px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     isActive
-                      ? "text-blue-600 bg-blue-200"
-                      : "text-gray-700 hover:text-blue-600 hover:bg-blue-300"
+                      ? "text-white bg-cyan-600"
+                      : "text-gray-700 hover:text-black hover:bg-cyan-500"
                   }`
                 }
               >
@@ -81,6 +81,12 @@ export const Navbar: React.FC = () => {
                 <span className="text-sm text-gray-600 font-medium">
                   Hi, {user.username}
                 </span>
+                <Link
+                  to="/designer"
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold text-white bg-cyan-600 rounded-full hover:bg-cyan-700 transition-all transform hover:scale-105 shadow-md"
+                >
+                  <Sofa className="w-4 h-4" /> Designer
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold text-white bg-red-500 rounded-full hover:bg-red-600 transition-all transform hover:scale-105 shadow-md"
@@ -143,6 +149,13 @@ export const Navbar: React.FC = () => {
                       {user.username}
                     </span>
                   </p>
+                  <Link
+                    to="/designer"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full flex items-center justify-center gap-1.5 px-5 py-3 text-sm font-semibold text-white bg-cyan-600 rounded-full hover:bg-cyan-700 transition-colors"
+                  >
+                    <Sofa className="w-4 h-4" /> Designer
+                  </Link>
                   <button
                     onClick={handleLogout}
                     className="w-full flex items-center justify-center gap-1.5 px-5 py-3 text-sm font-semibold text-white bg-red-500 rounded-full hover:bg-red-600 transition-colors"

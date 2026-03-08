@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -6,6 +6,14 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
+
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 import { Login } from "./pages/Login";
 import { Landing } from "./pages/Landing";
 import { Designer } from "./pages/Designer";
@@ -32,6 +40,8 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <StateProvider>
+          {" "}
+          <ScrollToTop />{" "}
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/about" element={<AboutUs />} />
