@@ -57,7 +57,7 @@ export const Landing: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl font-bold font-heading text-gray-900 mb-6">
-              Why Choose iFurnish?
+              Why Choose Concept Store?
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-mono">
               Discover the perfect blend of technology and design to create your
@@ -127,12 +127,12 @@ export const Landing: React.FC = () => {
       <footer className="bg-gray-900 text-gray-400 pt-8 pb-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold font-logo text-white mb-1">iFurnish</h2>
+            <h2 className="text-3xl font-bold font-logo text-white mb-1">Concept.Store</h2>
             <p className="text-lg mb-8 font-mono">
               Design your perfect space with confidence
             </p>
             <div className="text-sm font-mono">
-              © {new Date().getFullYear()} iFurnish. All rights reserved.
+              © {new Date().getFullYear()} Concept.Store. All rights reserved.
             </div>
           </div>
         </div>

@@ -17,25 +17,25 @@ const contactInfo = [
     icon: MapPin,
     color: "bg-blue-100 text-blue-600",
     label: "Headquarters",
-    detail: "125 Main Street, Suite 10\nNew York, NY 10001",
+    detail: "42 Duplication Road, Kollupitiya,\nColombo 03, Sri Lanka.",
   },
   {
     icon: Phone,
     color: "bg-purple-100 text-purple-600",
     label: "Phone",
-    detail: "+1 (212) 555-0100\nMon–Fri, 9am–6pm EST",
+    detail: "+94 11 234 5678\nMon–Fri, 9am–6pm IST",
   },
   {
     icon: Mail,
     color: "bg-pink-100 text-pink-600",
     label: "Email",
-    detail: "hello@ifurnish.com\nWe reply within 24 hours",
+    detail: "hello@concept.store.com\nWe reply within 24 hours",
   },
   {
     icon: Clock,
     color: "bg-yellow-100 text-yellow-600",
     label: "Business Hours",
-    detail: "Mon–Fri: 9am – 6pm EST\nSat–Sun: Closed",
+    detail: "Mon–Fri: 9am – 6pm IST\nSat: 9am – 1pm · Sun: Closed",
   },
 ];
 
@@ -162,7 +162,7 @@ export const ContactUs: React.FC = () => {
                         id="name"
                         name="name"
                         type="text"
-                        placeholder="Jane Doe"
+                        placeholder="Kelum Silva"
                         value={form.name}
                         onChange={handleChange}
                         className={inputClass("name")}
@@ -186,7 +186,7 @@ export const ContactUs: React.FC = () => {
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="jane@example.com"
+                        placeholder="kelume@example.com"
                         value={form.email}
                         onChange={handleChange}
                         className={inputClass("email")}

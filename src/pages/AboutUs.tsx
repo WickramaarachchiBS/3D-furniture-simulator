@@ -1,29 +1,60 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Heart, Lightbulb, Users, ArrowRight, Star } from "lucide-react";
+import {
+  Heart,
+  Lightbulb,
+  Users,
+  ArrowRight,
+  Star,
+  Github,
+  Linkedin,
+} from "lucide-react";
 import { Navbar } from "../components/Navbar";
 
 const teamMembers = [
   {
-    name: "Sarah Mitchell",
-    role: "Co-Founder & CEO",
-    bio: "Former interior designer with 12 years of experience. Sarah founded iFurnish to make professional-grade design tools accessible to everyone.",
-    initials: "SM",
-    color: "bg-blue-500",
+    name: "Banuka Wickramaarachchi",
+    role: "Full Stack Developer · Project Lead",
+    avatar: "https://github.com/WickramaarachchiBS.png",
+    github: "https://github.com/WickramaarachchiBS",
+    linkedin: "https://www.linkedin.com/in/banuka-wickramaarachchi-3a9117256/",
   },
   {
-    name: "James Okafor",
-    role: "Co-Founder & CTO",
-    bio: "Software engineer and 3D graphics enthusiast who built the core rendering engine. James believes great design and great technology are inseparable.",
-    initials: "JO",
-    color: "bg-purple-500",
+    name: "Himasha Sandeepani",
+    role: "Full Stack Developer · UI/UX Designer",
+    avatar: "https://github.com/Himashasandeepani.png",
+    github: "https://github.com/Himashasandeepani",
+    linkedin: "https://www.linkedin.com/in/himasha-sandeepani-036034287/",
   },
   {
-    name: "Priya Sharma",
-    role: "Head of Design",
-    bio: "Award-winning UX designer passionate about removing friction from the creative process. Priya ensures every interaction in iFurnish feels effortless.",
-    initials: "PS",
-    color: "bg-pink-500",
+    name: "Kasun Madhusanka",
+    role: "Full Stack Developer",
+    avatar: "https://github.com/Kasuuun7.png",
+    github: "https://github.com/Kasuuun7",
+    linkedin: "https://www.linkedin.com/in/kasun-madhushanka-609053209/",
+  },
+  {
+    name: "Kavindu Madhuranga",
+    role: "Full Stack Developer",
+    avatar:
+      "https://ui-avatars.com/api/?name=Kavindu+Madhuranga&background=random",
+    github: "https://github.com/Kavix31299",
+    linkedin: "#",
+  },
+  {
+    name: "Ashiru Dilmin",
+    role: "Full Stack Developer (3D Engine)",
+    avatar: "https://github.com/ashiru202.png",
+    github: "https://github.com/ashiru202",
+    linkedin: "https://www.linkedin.com/in/ashirudilmindesilva/",
+  },
+  {
+    name: "Rashmila Jayaweera",
+    role: "Full Stack Developer · UI/UX Designer",
+    avatar:
+      "https://ui-avatars.com/api/?name=Rashmila+Jayaweera&background=random",
+    github: "https://github.com/JayaweeraHRK",
+    linkedin: "https://www.linkedin.com/in/rashmila-jayaweera-8b3593266/",
   },
 ];
 
@@ -60,7 +91,7 @@ export const AboutUs: React.FC = () => {
       <div className="hero-gradient pt-32 pb-24 lg:pt-48 lg:pb-32 text-center px-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            About <span className="text-gradient">iFurnish</span>
+            About <span className="text-gradient">Concept.Store</span>
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
             We're a team of designers, engineers, and dreamers on a mission to
@@ -81,7 +112,7 @@ export const AboutUs: React.FC = () => {
                 Born from a frustration, built with passion
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                iFurnish started in 2022 when our co-founders — an interior
+                Concept.Store started in 2022 when our co-founders — an interior
                 designer and a software engineer — kept running into the same
                 problem: existing room-planning tools were either too simple to
                 be useful or too complex to be approachable.
@@ -89,8 +120,8 @@ export const AboutUs: React.FC = () => {
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
                 They spent a year building a tool they actually wanted to use —
                 one that combined real-time 3D rendering with an interface so
-                intuitive you could get started in minutes. Today, iFurnish is
-                used by over 50,000 homeowners, renters, and professionals
+                intuitive you could get started in minutes. Today, Concept.Store
+                is used by over 50,000 homeowners, renters, and professionals
                 worldwide.
               </p>
               <Link
@@ -164,28 +195,49 @@ export const AboutUs: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">
-              The People Behind iFurnish
+              The People Behind Concept.Store
             </span>
             <h2 className="text-4xl font-bold text-gray-900 mt-3">
               Meet the Team
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {teamMembers.map(({ name, role, bio, initials, color }) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {teamMembers.map(({ name, role, avatar, github, linkedin }) => (
               <div
                 key={name}
-                className="text-center bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow"
+                className="text-center bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow flex flex-col items-center"
               >
-                <div
-                  className={`w-20 h-20 rounded-full ${color} mx-auto mb-5 flex items-center justify-center text-white text-2xl font-bold shadow-md`}
-                >
-                  {initials}
-                </div>
+                <img
+                  src={avatar}
+                  alt={name}
+                  className="w-24 h-24 rounded-full mx-auto mb-5 object-cover shadow-md border-4 border-white ring-2 ring-cyan-100"
+                />
                 <h3 className="text-xl font-semibold text-gray-900 mb-1">
                   {name}
                 </h3>
-                <p className="text-blue-600 font-medium text-sm mb-4">{role}</p>
-                <p className="text-gray-600 text-sm leading-relaxed">{bio}</p>
+                <p className="text-cyan-600 font-medium text-sm mb-5">{role}</p>
+                <div className="flex items-center justify-center gap-3 mt-auto">
+                  <a
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-800 hover:text-white transition-colors"
+                    aria-label={`${name} GitHub`}
+                  >
+                    <Github className="w-4 h-4" />
+                  </a>
+                  {linkedin && (
+                    <a
+                      href={linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 flex items-center justify-center rounded-full bg-blue-100 text-blue-700 hover:bg-blue-600 hover:text-white transition-colors"
+                      aria-label={`${name} LinkedIn`}
+                    >
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>

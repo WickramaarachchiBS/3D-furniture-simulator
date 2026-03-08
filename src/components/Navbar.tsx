@@ -50,7 +50,7 @@ export const Navbar: React.FC = () => {
                 scrolled || menuOpen ? "text-gray-900" : "text-gray-900"
               }`}
             >
-              iFurnish
+              Concept.Store
             </span>
           </Link>
 

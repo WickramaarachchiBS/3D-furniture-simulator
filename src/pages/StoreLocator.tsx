@@ -4,44 +4,54 @@ import { Navbar } from "../components/Navbar";
 
 const stores = [
   {
-    id: 1,
-    name: "iFurnish Downtown",
-    address: "125 Main Street, Suite 10, New York, NY 10001",
-    hours: "Mon–Sat 9am–8pm · Sun 11am–6pm",
-    phone: "+1 (212) 555-0142",
-    city: "new york",
+    id: 5,
+    name: "Concept.Store Colombo",
+    address: "42 Duplication Road, Kollupitiya, Colombo 03",
+    hours: "Mon–Sat 9am–8pm · Sun 10am–6pm",
+    phone: "+94 11 234 5678",
+    city: "colombo",
     tag: "Flagship",
     tagColor: "bg-blue-100 text-blue-700",
   },
   {
-    id: 2,
-    name: "iFurnish Westside",
-    address: "8800 Sunset Blvd, Los Angeles, CA 90069",
-    hours: "Mon–Sat 10am–8pm · Sun 11am–7pm",
-    phone: "+1 (310) 555-0198",
-    city: "los angeles",
-    tag: "Design Studio",
-    tagColor: "bg-purple-100 text-purple-700",
-  },
-  {
-    id: 3,
-    name: "iFurnish Midtown",
-    address: "233 N Michigan Ave, Chicago, IL 60601",
-    hours: "Mon–Fri 9am–7pm · Sat 10am–7pm · Sun 12pm–5pm",
-    phone: "+1 (312) 555-0176",
-    city: "chicago",
+    id: 6,
+    name: "Concept.Store Kandy",
+    address: "18 Peradeniya Road, Kandy 20000",
+    hours: "Mon–Sat 9am–7pm · Sun 11am–5pm",
+    phone: "+94 81 223 4567",
+    city: "kandy",
     tag: "Showroom",
     tagColor: "bg-pink-100 text-pink-700",
   },
   {
-    id: 4,
-    name: "iFurnish South End",
-    address: "900 South Congress Ave, Austin, TX 78704",
-    hours: "Mon–Sat 10am–7pm · Sun 12pm–6pm",
-    phone: "+1 (512) 555-0231",
-    city: "austin",
+    id: 7,
+    name: "Concept.Store Galle",
+    address: "7 Wakwella Road, Galle 80000",
+    hours: "Mon–Fri 9am–6pm · Sat 9am–7pm · Sun 11am–4pm",
+    phone: "+94 91 222 3456",
+    city: "galle",
+    tag: "Design Studio",
+    tagColor: "bg-purple-100 text-purple-700",
+  },
+  {
+    id: 8,
+    name: "Concept.Store Negombo",
+    address: "55 Poruthota Road, Negombo 11500",
+    hours: "Mon–Sat 10am–7pm · Sun 11am–5pm",
+    phone: "+94 31 221 7890",
+    city: "negombo",
     tag: "New",
     tagColor: "bg-green-100 text-green-700",
+  },
+  {
+    id: 9,
+    name: "Concept.Store Kurunegala",
+    address: "23 Colombo Road, Kurunegala 60000",
+    hours: "Mon–Sat 9am–7pm · Sun Closed",
+    phone: "+94 37 222 6543",
+    city: "kurunegala",
+    tag: "Showroom",
+    tagColor: "bg-pink-100 text-pink-700",
   },
 ];
 
@@ -67,8 +77,8 @@ export const StoreLocator: React.FC = () => {
             Find a <span className="text-gradient">Store Near You</span>
           </h1>
           <p className="text-xl text-gray-600 mb-10">
-            Visit one of our showrooms and experience iFurnish in person with
-            expert design consultants ready to help.
+            Visit one of our showrooms and experience Concept.Store in person
+            with expert design consultants ready to help.
           </p>
           {/* Search bar */}
           <div className="relative max-w-xl mx-auto">
@@ -83,8 +93,6 @@ export const StoreLocator: React.FC = () => {
           </div>
         </div>
       </div>
-
-      
 
       {/* Store listings */}
       <section className="py-20 bg-white">
