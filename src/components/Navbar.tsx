@@ -55,7 +55,7 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop nav links */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-2">
             {navLinks.map(({ label, to }) => (
               <NavLink
                 key={to}
@@ -64,7 +64,7 @@ export const Navbar: React.FC = () => {
                 className={({ isActive }) =>
                   `px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     isActive
-                      ? "text-blue-600 bg-blue-300"
+                      ? "text-blue-600 bg-blue-200"
                       : "text-gray-700 hover:text-blue-600 hover:bg-blue-300"
                   }`
                 }
