@@ -71,9 +71,15 @@ export const StoreLocator: React.FC = () => {
       <Navbar />
 
       {/* Hero */}
-      <div className="hero-gradient pt-32 pb-16 lg:pt-40 lg:pb-20 px-4 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+      <div className="relative overflow-hidden hero-gradient pt-32 pb-16 lg:pt-40 lg:pb-20 px-4 text-center">
+        <div className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-[url('https://images.pexels.com/photos/4846097/pexels-photo-4846097.jpeg')] bg-cover bg-center opacity-50"
+            style={{ filter: "blur(8px)" }}
+          />
+        </div>
+        <div className="relative max-w-3xl mx-auto">
+          <h1 className="text-5xl lg:text-6xl font-bold font-heading mb-8 tracking-tight text-black [-webkit-text-stroke:1px_black]">
             Find a <span className="text-gradient">Store Near You</span>
           </h1>
           <p className="text-xl text-gray-600 mb-10">

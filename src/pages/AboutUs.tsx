@@ -88,9 +88,15 @@ export const AboutUs: React.FC = () => {
       <Navbar />
 
       {/* Hero */}
-      <div className="hero-gradient pt-32 pb-24 lg:pt-48 lg:pb-32 text-center px-4">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+      <div className="relative overflow-hidden hero-gradient pt-32 pb-24 lg:pt-48 lg:pb-32 text-center px-4">
+        <div className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg')] bg-cover bg-center opacity-50"
+            style={{ filter: "blur(8px)" }}
+          />
+        </div>
+        <div className="relative max-w-4xl mx-auto">
+          <h1 className="text-5xl lg:text-6xl font-bold font-heading mb-8 tracking-tight text-black [-webkit-text-stroke:1px_black]">
             About <span className="text-gradient">Concept.Store</span>
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">

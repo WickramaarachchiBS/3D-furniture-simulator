@@ -16,14 +16,14 @@ export const Landing: React.FC = () => {
       <div className="relative overflow-hidden hero-gradient">
         <div className="absolute inset-0">
           <div
-            className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg')] bg-cover bg-center opacity-5"
+            className="absolute inset-0 bg-[url('https://images.pexels.com/photos/3741314/pexels-photo-3741314.jpeg')] bg-cover bg-center opacity-50"
             style={{ filter: "blur(8px)" }}
           ></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="pt-32 pb-24 lg:pt-48 lg:pb-40 text-center">
-            <h1 className="text-5xl lg:text-7xl font-bold font-heading mb-8 tracking-tight">
+            <h1 className="text-5xl lg:text-7xl font-bold font-heading mb-8 tracking-tight text-black [-webkit-text-stroke:1px_black]">
               Design Your <span className="text-gradient">Perfect Space</span>
             </h1>
 
