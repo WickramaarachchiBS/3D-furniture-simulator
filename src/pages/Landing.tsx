@@ -36,7 +36,7 @@ export const Landing: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/login"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold font-mono text-white bg-cyan-600 rounded-full hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-8 py-4 text-lg font-semibold font-mono text-white bg-cyan-600 rounded-full hover:bg-cyan-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Start Designing <ArrowRight className="ml-2" />
               </Link>

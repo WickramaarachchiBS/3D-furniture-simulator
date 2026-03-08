@@ -95,7 +95,7 @@ export const AboutUs: React.FC = () => {
               </p>
               <Link
                 to="/login"
-                className="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-all transform hover:scale-105 shadow-md"
+                className="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold text-white bg-cyan-600 rounded-full hover:bg-cyan-700 transition-all transform hover:scale-105 shadow-md"
               >
                 Try It Free <ArrowRight className="w-4 h-4" />
               </Link>
@@ -203,7 +203,7 @@ export const AboutUs: React.FC = () => {
           </p>
           <Link
             to="/login"
-            className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg"
+            className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-cyan-600 rounded-full hover:bg-cyan-700 transition-all transform hover:scale-105 shadow-lg"
           >
             Get Started Free <ArrowRight className="w-5 h-5" />
           </Link>

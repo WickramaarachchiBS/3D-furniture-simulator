@@ -5,9 +5,9 @@ import { useAuth } from "../store/AuthProvider";
 
 const navLinks = [
   { label: "Home", to: "/" },
-  { label: "About Us", to: "/about" },
   { label: "Store Locator", to: "/store-locator" },
   { label: "Contact Us", to: "/contact" },
+  { label: "About Us", to: "/about" },
 ];
 
 export const Navbar: React.FC = () => {
