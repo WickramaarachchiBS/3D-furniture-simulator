@@ -6,10 +6,12 @@ import {
   Share2,
   Laptop as DeviceLaptop,
 } from "lucide-react";
+import { Navbar } from "../components/Navbar";
 
 export const Landing: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
+      <Navbar />
       {/* Hero Section */}
       <div className="relative overflow-hidden hero-gradient">
         <div className="absolute inset-0">
