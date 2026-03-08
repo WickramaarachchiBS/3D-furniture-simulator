@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { Login } from "./pages/Login";
 import { Landing } from "./pages/Landing";
 import { Designer } from "./pages/Designer";
@@ -13,7 +19,12 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { user } = useAuth();
-  return user ? <>{children}</> : <Navigate to="/login" replace />;
+  const location = useLocation();
+  return user ? (
+    <>{children}</>
+  ) : (
+    <Navigate to="/login" state={{ from: location }} replace />
+  );
 };
 
 export default function App() {

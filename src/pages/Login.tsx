@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../store/AuthProvider';
-import { LogIn } from 'lucide-react';
+import React, { useState } from "react";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { useAuth } from "../store/AuthProvider";
+import { LogIn } from "lucide-react";
 
 export const Login: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const { login } = useAuth();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { login, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from =
+    (location.state as { from?: { pathname: string } })?.from?.pathname ??
+    "/designer";
+
+  // Already logged in — send them along
+  if (user) return <Navigate to={from} replace />;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (login(username, password)) {
-      navigate('/designer');
+      navigate(from, { replace: true });
     } else {
-      setError('Invalid username or password');
+      setError("Invalid username or password");
     }
   };
 
@@ -30,7 +37,10 @@ export const Login: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
+            >
               Username
             </label>
             <input
@@ -44,7 +54,10 @@ export const Login: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
@@ -57,9 +70,7 @@ export const Login: React.FC = () => {
             />
           </div>
 
-          {error && (
-            <p className="text-red-500 text-sm">{error}</p>
-          )}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
 
           <button
             type="submit"

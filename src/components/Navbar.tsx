@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
-import { Sofa, Menu, X, ArrowRight } from "lucide-react";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { Sofa, Menu, X, ArrowRight, LogOut } from "lucide-react";
+import { useAuth } from "../store/AuthProvider";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -12,6 +13,14 @@ const navLinks = [
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+    setMenuOpen(false);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -55,8 +64,8 @@ export const Navbar: React.FC = () => {
                 className={({ isActive }) =>
                   `px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     isActive
-                      ? "text-blue-600 bg-blue-50"
-                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                      ? "text-blue-600 bg-blue-300"
+                      : "text-gray-700 hover:text-blue-600 hover:bg-blue-300"
                   }`
                 }
               >
@@ -66,13 +75,27 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center">
-            <Link
-              to="/login"
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-all transform hover:scale-105 shadow-md hover:shadow-lg"
-            >
-              Start Designing <ArrowRight className="w-4 h-4" />
-            </Link>
+          <div className="hidden md:flex items-center gap-3">
+            {user ? (
+              <>
+                <span className="text-sm text-gray-600 font-medium">
+                  Hi, {user.username}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold text-white bg-red-500 rounded-full hover:bg-red-600 transition-all transform hover:scale-105 shadow-md"
+                >
+                  <LogOut className="w-4 h-4" /> Sign Out
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/login"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-all transform hover:scale-105 shadow-md hover:shadow-lg"
+              >
+                Start Designing <ArrowRight className="w-4 h-4" />
+              </Link>
+            )}
           </div>
 
           {/* Mobile hamburger */}
@@ -112,13 +135,30 @@ export const Navbar: React.FC = () => {
               </NavLink>
             ))}
             <div className="pt-2 border-t border-gray-100 mt-2">
-              <Link
-                to="/login"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-center gap-1.5 px-5 py-3 text-sm font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-colors"
-              >
-                Start Designing <ArrowRight className="w-4 h-4" />
-              </Link>
+              {user ? (
+                <div className="space-y-2">
+                  <p className="text-center text-sm text-gray-500">
+                    Signed in as{" "}
+                    <span className="font-semibold text-gray-700">
+                      {user.username}
+                    </span>
+                  </p>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center justify-center gap-1.5 px-5 py-3 text-sm font-semibold text-white bg-red-500 rounded-full hover:bg-red-600 transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" /> Sign Out
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center justify-center gap-1.5 px-5 py-3 text-sm font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-colors"
+                >
+                  Start Designing <ArrowRight className="w-4 h-4" />
+                </Link>
+              )}
             </div>
           </nav>
         </div>
