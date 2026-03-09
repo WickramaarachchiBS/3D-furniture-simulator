@@ -1,7 +1,7 @@
 <!-- Replace the src below with your actual logo path once available -->
-<p align="center">
+<!-- <p align="center">
   <img src="docs/assets/logo.png" alt="Concept.Store Logo" width="100" style="border-radius: 20px;" />
-</p>
+</p> -->
 
 <h1 align="center">🛋️ Concept.Store — 3D Room Designer</h1>
 
@@ -35,12 +35,29 @@
 
 ---
 
-## 📸 Preview
+## 📸 Screenshots
 
-<!-- Replace the src below with your actual GIF path once available, e.g. docs/assets/demo.gif -->
 <p align="center">
-  <img src="docs/assets/demo.gif" alt="Concept.Store Demo" width="100%" />
+  <img src="docs/assets/concept.store.gif" alt="Home Page" width="100%" />
 </p>
+
+<details>
+<summary><strong>🖼️ View More Screenshots</strong></summary>
+
+<br />
+
+| Page                     | Screenshot                                                 |
+| ------------------------ | ---------------------------------------------------------- |
+| **Home**        | ![Home](docs/assets/screenshots/home-screen.png)              |
+| **Login**        | ![Movies](docs/assets/screenshots/login-screen.png)              |
+| **Store Locator**        | ![Movie Details](docs/assets/screenshots/store-locator-screen.png) |
+| **Contact Us**       | ![Seat Selection](docs/assets/screenshots/contactus-screen.png)       |
+| **About Us**              | ![Payment](docs/assets/screenshots/aboutus-screen.png)            |
+| **3D Designer** | ![Confirmation](docs/assets/screenshots/3D-designer-screen.png)  |
+| **3D Designer**         | ![Profile](docs/assets/screenshots/2D-designer-screen.png)            |
+
+
+</details>
 
 ---
 
