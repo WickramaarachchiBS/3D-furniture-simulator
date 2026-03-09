@@ -5,9 +5,13 @@ import * as THREE from "three";
 import { useAppState } from "../../store/StateProvider";
 import { Furniture3D } from "./Furniture3D";
 import { Room3D } from "./Room3D";
-import { Sun } from "lucide-react";
+import { Sun, Move, RotateCcw as RotateIcon } from "lucide-react";
 
-const DragControls: React.FC = () => {
+interface DragControlsProps {
+  moveMode: boolean;
+}
+
+const DragControls: React.FC<DragControlsProps> = ({ moveMode }) => {
   const { camera, gl, scene } = useThree();
   const { furniture, updateFurniture, selectFurniture, room } = useAppState();
 
@@ -21,68 +25,16 @@ const DragControls: React.FC = () => {
   const selectedObject = useRef<THREE.Object3D | null>(null);
   const lastValidPosition = useRef(new THREE.Vector3());
 
-  const orbitControlsRef = useRef<any>(null);
-
-  // Get orbit controls reference from parent
-  useEffect(() => {
-    const controls = scene.parent?.parent?.getObjectByName("orbit-controls");
-    if (controls) {
-      orbitControlsRef.current = controls;
-    }
-  }, [scene]);
-
   // Get furniture dimensions with rotation consideration
   const getFurnitureDimensions = (
     type: string,
     rotation: number,
     scale: THREE.Vector3,
   ) => {
-    let width, depth;
-    switch (type) {
-      case "sofa":
-        width = 80;
-        depth = 30;
-        break;
-      case "chair":
-        width = 40;
-        depth = 40;
-        break;
-      case "coffee_table":
-        width = 60;
-        depth = 60;
-        break;
-      case "bookshelf":
-        width = 80;
-        depth = 30;
-        break;
-      case "plant":
-        width = 40;
-        depth = 40;
-        break;
-      case "wardrobe":
-        width = 100;
-        depth = 50;
-        break;
-      case "rug":
-        width = 120;
-        depth = 180;
-        break;
-      case "bed":
-        width = 140;
-        depth = 200;
-        break;
-      case "dining_table":
-        width = 100;
-        depth = 100;
-        break;
-      case "lamp":
-        width = 30;
-        depth = 30;
-        break;
-      default:
-        width = 50;
-        depth = 50;
-    }
+    // All furniture geometry is built on a 100×100 base footprint (100 * scale).
+    // Bookshelf is the exception: depth uses bsDepth = depth*0.4 → base depth = 40.
+    let width = 100;
+    let depth = type === "bookshelf" ? 40 : 100;
 
     width *= scale.x;
     depth *= scale.z;
@@ -108,7 +60,7 @@ const DragControls: React.FC = () => {
     const dim1 = getFurnitureDimensions(type1, rotation1, scale1);
     const dim2 = getFurnitureDimensions(type2, rotation2, scale2);
 
-    const padding = 20;
+    const padding = 10;
 
     const box1 = new THREE.Box3();
     const box2 = new THREE.Box3();
@@ -135,12 +87,12 @@ const DragControls: React.FC = () => {
     const scale = currentFurniture.scale;
     const dimensions = getFurnitureDimensions(furnitureType, rotation, scale);
 
-    const padding = 20;
-    const halfWidth = dimensions.width / 2 + padding;
-    const halfDepth = dimensions.depth / 2 + padding;
+    const margin = 2;
+    const halfWidth = dimensions.width / 2;
+    const halfDepth = dimensions.depth / 2;
 
-    const roomHalfWidth = room.width / 2 - padding;
-    const roomHalfLength = room.length / 2 - padding;
+    const roomHalfWidth = room.width / 2 - margin;
+    const roomHalfLength = room.length / 2 - margin;
 
     if (
       position.x - halfWidth < -roomHalfWidth ||
@@ -182,6 +134,8 @@ const DragControls: React.FC = () => {
     const canvasElement = gl.domElement;
 
     const handlePointerDown = (event: PointerEvent) => {
+      if (!moveMode) return;
+
       const rect = canvasElement.getBoundingClientRect();
       mouse.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       mouse.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
@@ -218,12 +172,7 @@ const DragControls: React.FC = () => {
         lastValidPosition.current.copy(parentObject.position);
 
         isDragging.current = true;
-        canvasElement.style.cursor = "grabbing";
-
-        // Disable orbit controls when starting to drag
-        if (orbitControlsRef.current) {
-          orbitControlsRef.current.enabled = false;
-        }
+        document.body.style.cursor = "grabbing";
       }
     };
 
@@ -267,26 +216,18 @@ const DragControls: React.FC = () => {
     const handlePointerUp = () => {
       if (isDragging.current) {
         isDragging.current = false;
-        canvasElement.style.cursor = "auto";
-
-        // Re-enable orbit controls when done dragging
-        if (orbitControlsRef.current) {
-          orbitControlsRef.current.enabled = true;
-        }
+        document.body.style.cursor = moveMode ? "grab" : "auto";
       }
     };
 
     const handlePointerCancel = () => {
       if (isDragging.current) {
         isDragging.current = false;
-        canvasElement.style.cursor = "auto";
-
-        // Re-enable orbit controls when drag is cancelled
-        if (orbitControlsRef.current) {
-          orbitControlsRef.current.enabled = true;
-        }
+        document.body.style.cursor = moveMode ? "grab" : "auto";
       }
     };
+
+    document.body.style.cursor = moveMode ? "grab" : "auto";
 
     canvasElement.addEventListener("pointerdown", handlePointerDown);
     canvasElement.addEventListener("pointermove", handlePointerMove);
@@ -294,12 +235,23 @@ const DragControls: React.FC = () => {
     canvasElement.addEventListener("pointercancel", handlePointerCancel);
 
     return () => {
+      document.body.style.cursor = "auto";
       canvasElement.removeEventListener("pointerdown", handlePointerDown);
       canvasElement.removeEventListener("pointermove", handlePointerMove);
       canvasElement.removeEventListener("pointerup", handlePointerUp);
       canvasElement.removeEventListener("pointercancel", handlePointerCancel);
     };
-  }, [camera, gl, scene, room, selectFurniture, updateFurniture, furniture]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    camera,
+    gl,
+    scene,
+    room,
+    selectFurniture,
+    updateFurniture,
+    furniture,
+    moveMode,
+  ]);
 
   return null;
 };
@@ -331,6 +283,22 @@ export const RoomEditor3D: React.FC = () => {
   ]);
   const [sunAngle, setSunAngle] = useState(45);
   const [sunHeight, setSunHeight] = useState(400);
+  const [moveMode, setMoveMode] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.code === "Space" &&
+        (e.target as HTMLElement).tagName !== "INPUT" &&
+        (e.target as HTMLElement).tagName !== "TEXTAREA"
+      ) {
+        e.preventDefault();
+        setMoveMode((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const updateSunPosition = (angle: number, height: number) => {
     const radius = 300;
@@ -350,6 +318,7 @@ export const RoomEditor3D: React.FC = () => {
         {sunEnabled && <SunLight position={sunPosition} />}
 
         <OrbitControls
+          enabled={!moveMode}
           enablePan={true}
           enableZoom={true}
           enableRotate={true}
@@ -372,8 +341,42 @@ export const RoomEditor3D: React.FC = () => {
           <Furniture3D key={item.id} furniture={item} />
         ))}
 
-        <DragControls />
+        <DragControls moveMode={moveMode} />
       </Canvas>
+
+      {/* Mode Toggle */}
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
+        <button
+          onClick={() => setMoveMode((prev) => !prev)}
+          title="Toggle between Orbit and Move modes (Spacebar)"
+          className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-lg text-sm font-medium transition-all select-none ${
+            moveMode
+              ? "bg-blue-600 text-white"
+              : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+          }`}
+        >
+          {moveMode ? (
+            <>
+              <Move size={15} />
+              <span>Move Mode</span>
+            </>
+          ) : (
+            <>
+              <RotateIcon size={15} />
+              <span>Orbit Mode</span>
+            </>
+          )}
+          <kbd
+            className={`ml-1 px-1.5 py-0.5 rounded text-xs font-mono border ${
+              moveMode
+                ? "border-blue-400 bg-blue-500"
+                : "border-gray-300 bg-gray-100 text-gray-500"
+            }`}
+          >
+            Space
+          </kbd>
+        </button>
+      </div>
 
       {/* Sun Controls */}
       <div className="absolute top-20 right-4 bg-white rounded-lg shadow-md p-4 space-y-4">
