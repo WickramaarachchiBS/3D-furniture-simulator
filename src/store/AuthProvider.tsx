@@ -9,7 +9,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const STORAGE_KEY = "ifurnish_user";
+const STORAGE_KEY = "concept.store_user";
 
 // Demo Credentials
 const users = [

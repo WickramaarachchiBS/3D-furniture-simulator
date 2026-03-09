@@ -12,7 +12,7 @@ export const ViewToggle: React.FC = () => {
 
     canvas.toBlob((blob) => {
       if (blob) {
-        saveAs(blob, `ifurnish-${viewMode}-screenshot-${Date.now()}.png`);
+        saveAs(blob, `concept.store-${viewMode}-screenshot-${Date.now()}.png`);
       }
     });
   };
