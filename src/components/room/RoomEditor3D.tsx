@@ -32,9 +32,18 @@ const DragControls: React.FC<DragControlsProps> = ({ moveMode }) => {
     scale: THREE.Vector3,
   ) => {
     // All furniture geometry is built on a 100×100 base footprint (100 * scale).
-    // Bookshelf is the exception: depth uses bsDepth = depth*0.4 → base depth = 40.
+    // Exceptions (depth): bookshelf →40, wardrobe →60, sofa →80, dining_table →60.
     let width = 100;
-    let depth = type === "bookshelf" ? 40 : 100;
+    let depth =
+      type === "bookshelf"
+        ? 40
+        : type === "wardrobe"
+          ? 60
+          : type === "sofa"
+            ? 80
+            : type === "dining_table"
+              ? 60
+              : 100;
 
     width *= scale.x;
     depth *= scale.z;

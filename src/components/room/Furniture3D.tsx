@@ -50,12 +50,13 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
     const metalColor = "#bdbdbd";
 
     switch (furniture.type) {
-      case "sofa":
+      case "sofa": {
+        const sofaDepth = depth * 0.8;
         return (
           <group>
             {/* Legs */}
             <mesh
-              position={[width * 0.37, height * 0.065, depth * 0.37]}
+              position={[width * 0.37, height * 0.065, sofaDepth * 0.37]}
               castShadow
             >
               <cylinderGeometry
@@ -64,7 +65,7 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               <meshStandardMaterial color={darkWoodColor} roughness={0.7} />
             </mesh>
             <mesh
-              position={[-width * 0.37, height * 0.065, depth * 0.37]}
+              position={[-width * 0.37, height * 0.065, sofaDepth * 0.37]}
               castShadow
             >
               <cylinderGeometry
@@ -73,7 +74,7 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               <meshStandardMaterial color={darkWoodColor} roughness={0.7} />
             </mesh>
             <mesh
-              position={[width * 0.37, height * 0.065, -depth * 0.37]}
+              position={[width * 0.37, height * 0.065, -sofaDepth * 0.37]}
               castShadow
             >
               <cylinderGeometry
@@ -82,7 +83,7 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               <meshStandardMaterial color={darkWoodColor} roughness={0.7} />
             </mesh>
             <mesh
-              position={[-width * 0.37, height * 0.065, -depth * 0.37]}
+              position={[-width * 0.37, height * 0.065, -sofaDepth * 0.37]}
               castShadow
             >
               <cylinderGeometry
@@ -92,60 +93,74 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
             </mesh>
             {/* Base body */}
             <mesh position={[0, height * 0.33, 0]} castShadow receiveShadow>
-              <boxGeometry args={[width * 0.85, height * 0.52, depth]} />
+              <boxGeometry args={[width * 0.85, height * 0.52, sofaDepth]} />
               <meshStandardMaterial color={color} roughness={0.85} />
             </mesh>
             {/* Seat cushions (3) */}
             <mesh
-              position={[-width * 0.27, height * 0.57, -depth * 0.04]}
+              position={[-width * 0.27, height * 0.57, -sofaDepth * 0.04]}
               castShadow
               receiveShadow
             >
-              <boxGeometry args={[width * 0.26, height * 0.17, depth * 0.7]} />
+              <boxGeometry
+                args={[width * 0.26, height * 0.17, sofaDepth * 0.7]}
+              />
               <meshStandardMaterial color={color} roughness={0.9} />
             </mesh>
             <mesh
-              position={[0, height * 0.57, -depth * 0.04]}
+              position={[0, height * 0.57, -sofaDepth * 0.04]}
               castShadow
               receiveShadow
             >
-              <boxGeometry args={[width * 0.26, height * 0.17, depth * 0.7]} />
+              <boxGeometry
+                args={[width * 0.26, height * 0.17, sofaDepth * 0.7]}
+              />
               <meshStandardMaterial color={color} roughness={0.9} />
             </mesh>
             <mesh
-              position={[width * 0.27, height * 0.57, -depth * 0.04]}
+              position={[width * 0.27, height * 0.57, -sofaDepth * 0.04]}
               castShadow
               receiveShadow
             >
-              <boxGeometry args={[width * 0.26, height * 0.17, depth * 0.7]} />
+              <boxGeometry
+                args={[width * 0.26, height * 0.17, sofaDepth * 0.7]}
+              />
               <meshStandardMaterial color={color} roughness={0.9} />
             </mesh>
             {/* Back rest */}
             <mesh
-              position={[0, height * 0.76, depth * 0.36]}
+              position={[0, height * 0.76, sofaDepth * 0.36]}
               castShadow
               receiveShadow
             >
-              <boxGeometry args={[width * 0.85, height * 0.6, depth * 0.26]} />
+              <boxGeometry
+                args={[width * 0.85, height * 0.6, sofaDepth * 0.26]}
+              />
               <meshStandardMaterial color={color} roughness={0.85} />
             </mesh>
             {/* Back cushions (3) */}
             <mesh
-              position={[-width * 0.27, height * 0.77, depth * 0.27]}
+              position={[-width * 0.27, height * 0.77, sofaDepth * 0.27]}
               castShadow
             >
-              <boxGeometry args={[width * 0.26, height * 0.47, depth * 0.06]} />
+              <boxGeometry
+                args={[width * 0.26, height * 0.47, sofaDepth * 0.06]}
+              />
               <meshStandardMaterial color={color} roughness={0.9} />
             </mesh>
-            <mesh position={[0, height * 0.77, depth * 0.27]} castShadow>
-              <boxGeometry args={[width * 0.26, height * 0.47, depth * 0.06]} />
+            <mesh position={[0, height * 0.77, sofaDepth * 0.27]} castShadow>
+              <boxGeometry
+                args={[width * 0.26, height * 0.47, sofaDepth * 0.06]}
+              />
               <meshStandardMaterial color={color} roughness={0.9} />
             </mesh>
             <mesh
-              position={[width * 0.27, height * 0.77, depth * 0.27]}
+              position={[width * 0.27, height * 0.77, sofaDepth * 0.27]}
               castShadow
             >
-              <boxGeometry args={[width * 0.26, height * 0.47, depth * 0.06]} />
+              <boxGeometry
+                args={[width * 0.26, height * 0.47, sofaDepth * 0.06]}
+              />
               <meshStandardMaterial color={color} roughness={0.9} />
             </mesh>
             {/* Armrests */}
@@ -154,7 +169,7 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               castShadow
               receiveShadow
             >
-              <boxGeometry args={[width * 0.14, height * 0.63, depth]} />
+              <boxGeometry args={[width * 0.14, height * 0.63, sofaDepth]} />
               <meshStandardMaterial color={color} roughness={0.85} />
             </mesh>
             <mesh
@@ -162,11 +177,12 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               castShadow
               receiveShadow
             >
-              <boxGeometry args={[width * 0.14, height * 0.63, depth]} />
+              <boxGeometry args={[width * 0.14, height * 0.63, sofaDepth]} />
               <meshStandardMaterial color={color} roughness={0.85} />
             </mesh>
           </group>
         );
+      }
 
       case "chair":
         return (
@@ -297,29 +313,34 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
           </group>
         );
 
-      case "dining_table":
+      case "dining_table": {
+        const dtDepth = depth * 0.6;
         return (
           <group>
             {/* Tabletop */}
             <mesh position={[0, height * 0.96, 0]} castShadow receiveShadow>
-              <boxGeometry args={[width, height * 0.08, depth]} />
+              <boxGeometry args={[width, height * 0.08, dtDepth]} />
               <meshStandardMaterial color={color} roughness={0.5} />
             </mesh>
             {/* Apron - long sides */}
             <mesh
-              position={[0, height * 0.88, depth * 0.42]}
+              position={[0, height * 0.88, dtDepth * 0.42]}
               castShadow
               receiveShadow
             >
-              <boxGeometry args={[width * 0.85, height * 0.07, depth * 0.05]} />
+              <boxGeometry
+                args={[width * 0.85, height * 0.07, dtDepth * 0.05]}
+              />
               <meshStandardMaterial color={color} roughness={0.6} />
             </mesh>
             <mesh
-              position={[0, height * 0.88, -depth * 0.42]}
+              position={[0, height * 0.88, -dtDepth * 0.42]}
               castShadow
               receiveShadow
             >
-              <boxGeometry args={[width * 0.85, height * 0.07, depth * 0.05]} />
+              <boxGeometry
+                args={[width * 0.85, height * 0.07, dtDepth * 0.05]}
+              />
               <meshStandardMaterial color={color} roughness={0.6} />
             </mesh>
             {/* Apron - short sides */}
@@ -328,7 +349,9 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               castShadow
               receiveShadow
             >
-              <boxGeometry args={[width * 0.08, height * 0.07, depth * 0.85]} />
+              <boxGeometry
+                args={[width * 0.08, height * 0.07, dtDepth * 0.85]}
+              />
               <meshStandardMaterial color={color} roughness={0.6} />
             </mesh>
             <mesh
@@ -336,12 +359,14 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               castShadow
               receiveShadow
             >
-              <boxGeometry args={[width * 0.08, height * 0.07, depth * 0.85]} />
+              <boxGeometry
+                args={[width * 0.08, height * 0.07, dtDepth * 0.85]}
+              />
               <meshStandardMaterial color={color} roughness={0.6} />
             </mesh>
             {/* Legs */}
             <mesh
-              position={[width * 0.4, height * 0.45, depth * 0.4]}
+              position={[width * 0.4, height * 0.45, dtDepth * 0.4]}
               castShadow
             >
               <cylinderGeometry
@@ -350,7 +375,7 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               <meshStandardMaterial color={darkWoodColor} roughness={0.7} />
             </mesh>
             <mesh
-              position={[-width * 0.4, height * 0.45, depth * 0.4]}
+              position={[-width * 0.4, height * 0.45, dtDepth * 0.4]}
               castShadow
             >
               <cylinderGeometry
@@ -359,7 +384,7 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               <meshStandardMaterial color={darkWoodColor} roughness={0.7} />
             </mesh>
             <mesh
-              position={[width * 0.4, height * 0.45, -depth * 0.4]}
+              position={[width * 0.4, height * 0.45, -dtDepth * 0.4]}
               castShadow
             >
               <cylinderGeometry
@@ -368,7 +393,7 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               <meshStandardMaterial color={darkWoodColor} roughness={0.7} />
             </mesh>
             <mesh
-              position={[-width * 0.4, height * 0.45, -depth * 0.4]}
+              position={[-width * 0.4, height * 0.45, -dtDepth * 0.4]}
               castShadow
             >
               <cylinderGeometry
@@ -378,6 +403,7 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
             </mesh>
           </group>
         );
+      }
 
       case "bookshelf": {
         const bsDepth = depth * 0.4;
@@ -498,54 +524,63 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
         );
       }
 
-      case "wardrobe":
+      case "wardrobe": {
+        const wdDepth = depth * 0.6;
         return (
           <group>
             {/* Main body */}
             <mesh position={[0, height * 0.5, 0]} castShadow receiveShadow>
-              <boxGeometry args={[width, height, depth]} />
+              <boxGeometry args={[width, height, wdDepth]} />
               <meshStandardMaterial color={color} roughness={0.7} />
             </mesh>
             {/* Left door outer panel */}
             <mesh
-              position={[width * 0.25, height * 0.55, depth * 0.505]}
+              position={[width * 0.25, height * 0.55, wdDepth * 0.505]}
               castShadow
             >
-              <boxGeometry args={[width * 0.46, height * 0.82, depth * 0.02]} />
+              <boxGeometry
+                args={[width * 0.46, height * 0.82, wdDepth * 0.02]}
+              />
               <meshStandardMaterial color={color} roughness={0.6} />
             </mesh>
             {/* Left door inner panel */}
             <mesh
-              position={[width * 0.25, height * 0.55, depth * 0.52]}
+              position={[width * 0.25, height * 0.55, wdDepth * 0.52]}
               castShadow
             >
-              <boxGeometry args={[width * 0.36, height * 0.7, depth * 0.02]} />
+              <boxGeometry
+                args={[width * 0.36, height * 0.7, wdDepth * 0.02]}
+              />
               <meshStandardMaterial color={color} roughness={0.55} />
             </mesh>
             {/* Right door outer panel */}
             <mesh
-              position={[-width * 0.25, height * 0.55, depth * 0.505]}
+              position={[-width * 0.25, height * 0.55, wdDepth * 0.505]}
               castShadow
             >
-              <boxGeometry args={[width * 0.46, height * 0.82, depth * 0.02]} />
+              <boxGeometry
+                args={[width * 0.46, height * 0.82, wdDepth * 0.02]}
+              />
               <meshStandardMaterial color={color} roughness={0.6} />
             </mesh>
             {/* Right door inner panel */}
             <mesh
-              position={[-width * 0.25, height * 0.55, depth * 0.52]}
+              position={[-width * 0.25, height * 0.55, wdDepth * 0.52]}
               castShadow
             >
-              <boxGeometry args={[width * 0.36, height * 0.7, depth * 0.02]} />
+              <boxGeometry
+                args={[width * 0.36, height * 0.7, wdDepth * 0.02]}
+              />
               <meshStandardMaterial color={color} roughness={0.55} />
             </mesh>
             {/* Center divider strip */}
-            <mesh position={[0, height * 0.5, depth * 0.508]}>
-              <boxGeometry args={[width * 0.04, height, depth * 0.02]} />
+            <mesh position={[0, height * 0.5, wdDepth * 0.508]}>
+              <boxGeometry args={[width * 0.04, height, wdDepth * 0.02]} />
               <meshStandardMaterial color={color} roughness={0.7} />
             </mesh>
             {/* Handles */}
             <mesh
-              position={[width * 0.07, height * 0.5, depth * 0.56]}
+              position={[width * 0.07, height * 0.5, wdDepth * 0.56]}
               castShadow
             >
               <cylinderGeometry
@@ -558,7 +593,7 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
               />
             </mesh>
             <mesh
-              position={[-width * 0.07, height * 0.5, depth * 0.56]}
+              position={[-width * 0.07, height * 0.5, wdDepth * 0.56]}
               castShadow
             >
               <cylinderGeometry
@@ -572,16 +607,21 @@ export const Furniture3D: React.FC<Furniture3DProps> = ({ furniture }) => {
             </mesh>
             {/* Base plinth */}
             <mesh position={[0, height * 0.04, 0]} castShadow receiveShadow>
-              <boxGeometry args={[width * 1.02, height * 0.07, depth * 0.96]} />
+              <boxGeometry
+                args={[width * 1.02, height * 0.07, wdDepth * 0.96]}
+              />
               <meshStandardMaterial color={darkWoodColor} roughness={0.8} />
             </mesh>
             {/* Top cornice */}
             <mesh position={[0, height * 1.02, 0]} castShadow>
-              <boxGeometry args={[width * 1.04, height * 0.04, depth * 1.04]} />
+              <boxGeometry
+                args={[width * 1.04, height * 0.04, wdDepth * 1.04]}
+              />
               <meshStandardMaterial color={darkWoodColor} roughness={0.8} />
             </mesh>
           </group>
         );
+      }
 
       case "lamp":
         return (
