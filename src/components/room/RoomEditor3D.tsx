@@ -33,7 +33,8 @@ const DragControls: React.FC<DragControlsProps> = ({ moveMode }) => {
   ) => {
     // All furniture geometry is built on a 100×100 base footprint (100 * scale).
     // Exceptions (depth): bookshelf →40, wardrobe →60, sofa →80, dining_table →60.
-    let width = 100;
+    // Lamp has a small base: width and depth both →30.
+    let width = type === "lamp" ? 30 : 100;
     let depth =
       type === "bookshelf"
         ? 40
@@ -43,7 +44,9 @@ const DragControls: React.FC<DragControlsProps> = ({ moveMode }) => {
             ? 80
             : type === "dining_table"
               ? 60
-              : 100;
+              : type === "lamp"
+                ? 30
+                : 100;
 
     width *= scale.x;
     depth *= scale.z;

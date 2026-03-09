@@ -134,9 +134,9 @@ export const RoomEditor2D: React.FC = () => {
 
       const template = defaultFurniture.find((f) => f.type === item.type);
 
-      // Use same base dimensions as 3D (100×100, bookshelf 100×40, wardrobe 100×60, sofa 100×80, dining_table 100×60)
+      // Use same base dimensions as 3D (bookshelf 40, wardrobe 60, sofa 80, dining_table 60, lamp 30, others 100)
       // so that position clamping is consistent between views
-      const width = 100 * item.scale.x;
+      const width = (item.type === "lamp" ? 30 : 100) * item.scale.x;
       const depth =
         (item.type === "bookshelf"
           ? 40
@@ -146,7 +146,9 @@ export const RoomEditor2D: React.FC = () => {
               ? 80
               : item.type === "dining_table"
                 ? 60
-                : 100) * item.scale.z;
+                : item.type === "lamp"
+                  ? 30
+                  : 100) * item.scale.z;
 
       context.save();
       context.translate(pos.x, pos.y);
@@ -210,7 +212,7 @@ export const RoomEditor2D: React.FC = () => {
         const item = furniture[i];
 
         // Same base dimensions as 3D
-        const width = 100 * item.scale.x;
+        const width = (item.type === "lamp" ? 30 : 100) * item.scale.x;
         const depth =
           (item.type === "bookshelf"
             ? 40
@@ -220,7 +222,9 @@ export const RoomEditor2D: React.FC = () => {
                 ? 80
                 : item.type === "dining_table"
                   ? 60
-                  : 100) * item.scale.z;
+                  : item.type === "lamp"
+                    ? 30
+                    : 100) * item.scale.z;
 
         const halfWidth = width / 2;
         const halfDepth = depth / 2;
@@ -263,7 +267,9 @@ export const RoomEditor2D: React.FC = () => {
               ? 80
               : selectedItem.type === "dining_table"
                 ? 60
-                : 100) * selectedItem.scale.z;
+                : selectedItem.type === "lamp"
+                  ? 30
+                  : 100) * selectedItem.scale.z;
 
       const pos = {
         x: offset.x + (selectedItem.position.x + room.width / 2) * scale,
@@ -350,7 +356,9 @@ export const RoomEditor2D: React.FC = () => {
         let halfW = 50;
         let halfD = 50;
         if (draggedItem) {
-          halfW = (100 * draggedItem.scale.x) / 2;
+          halfW =
+            ((draggedItem.type === "lamp" ? 30 : 100) * draggedItem.scale.x) /
+            2;
           halfD =
             ((draggedItem.type === "bookshelf"
               ? 40
@@ -360,7 +368,9 @@ export const RoomEditor2D: React.FC = () => {
                   ? 80
                   : draggedItem.type === "dining_table"
                     ? 60
-                    : 100) *
+                    : draggedItem.type === "lamp"
+                      ? 30
+                      : 100) *
               draggedItem.scale.z) /
             2;
         }
