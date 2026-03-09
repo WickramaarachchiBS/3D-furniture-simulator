@@ -51,7 +51,7 @@ export const Login: React.FC = () => {
               <Sofa className="w-6 h-6 text-white" />
             </div>
             <span className="text-2xl font-bold text-white font-logo tracking-tight">
-              iFurnish
+              Concept.Store
             </span>
           </Link>
           <div>
