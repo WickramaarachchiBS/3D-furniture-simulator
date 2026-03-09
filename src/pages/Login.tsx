@@ -67,7 +67,7 @@ export const Login: React.FC = () => {
             {/* Decorative divider */}
             <div className="mt-8 flex items-center gap-3">
               <div className="h-px flex-1 bg-white/20" />
-              <span className="text-white/40 text-sm">iFurnish Studio</span>
+              <span className="text-white/40 text-sm">Concept.store Studio</span>
               <div className="h-px flex-1 bg-white/20" />
             </div>
           </div>
@@ -87,7 +87,7 @@ export const Login: React.FC = () => {
               <Sofa className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold text-gray-900 font-logo">
-              iFurnish
+              Concept.store
             </span>
           </div>
 
