@@ -320,7 +320,7 @@ export const RoomEditor3D: React.FC = () => {
 
   return (
     <div className="w-full h-full relative">
-      <Canvas shadows>
+      <Canvas shadows gl={{ preserveDrawingBuffer: true }}>
         <PerspectiveCamera makeDefault position={[0, 300, 500]} fov={50} />
         <ambientLight intensity={0.3} />
 
