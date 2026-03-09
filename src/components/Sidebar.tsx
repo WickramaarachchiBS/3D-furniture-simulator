@@ -35,7 +35,7 @@ export const Sidebar: React.FC = () => {
           >
             <Sofa size={20} />
             {!isCollapsed && (
-              <span className="ml-2 text-sm font-medium">Furniture</span>
+              <span className="ml-2 text-xs">Furniture</span>
             )}
           </button>
 
@@ -50,7 +50,7 @@ export const Sidebar: React.FC = () => {
           >
             <Sliders size={20} />
             {!isCollapsed && (
-              <span className="ml-2 text-sm font-medium">Room</span>
+              <span className="ml-2 text-xs">Room</span>
             )}
           </button>
 
@@ -65,7 +65,7 @@ export const Sidebar: React.FC = () => {
           >
             <Layers size={20} />
             {!isCollapsed && (
-              <span className="ml-2 text-sm font-medium">Layouts</span>
+              <span className="ml-2 text-xs">Layouts</span>
             )}
           </button>
         </div>

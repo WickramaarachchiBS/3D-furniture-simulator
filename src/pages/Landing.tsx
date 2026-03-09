@@ -6,26 +6,28 @@ import {
   Share2,
   Laptop as DeviceLaptop,
 } from "lucide-react";
+import { Navbar } from "../components/Navbar";
 
 export const Landing: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
+      <Navbar />
       {/* Hero Section */}
       <div className="relative overflow-hidden hero-gradient">
         <div className="absolute inset-0">
           <div
-            className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg')] bg-cover bg-center opacity-5"
+            className="absolute inset-0 bg-[url('https://images.pexels.com/photos/3741314/pexels-photo-3741314.jpeg')] bg-cover bg-center opacity-50"
             style={{ filter: "blur(8px)" }}
           ></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="pt-32 pb-24 lg:pt-48 lg:pb-40 text-center">
-            <h1 className="text-5xl lg:text-7xl font-bold mb-8 tracking-tight">
+            <h1 className="text-5xl lg:text-7xl font-bold font-heading mb-8 tracking-tight text-black [-webkit-text-stroke:1px_black]">
               Design Your <span className="text-gradient">Perfect Space</span>
             </h1>
 
-            <p className="text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p className="text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed font-mono">
               Experience the future of interior design with our intuitive 3D
               room designer. Create, customize, and visualize your dream space
               in minutes.
@@ -34,14 +36,14 @@ export const Landing: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/login"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-8 py-4 text-lg font-semibold font-mono text-white bg-cyan-600 rounded-full hover:bg-cyan-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Start Designing <ArrowRight className="ml-2" />
               </Link>
 
               <a
                 href="#features"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-gray-700 bg-white rounded-full hover:bg-gray-50 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-8 py-4 text-lg font-semibold font-mono text-gray-700 bg-white rounded-full hover:bg-gray-50 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Learn More
               </a>
@@ -54,10 +56,10 @@ export const Landing: React.FC = () => {
       <div id="features" className="py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Why Choose iFurnish?
+            <h2 className="text-4xl font-bold font-heading text-gray-900 mb-6">
+              Why Choose Concept Store?
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-mono">
               Discover the perfect blend of technology and design to create your
               ideal living space
             </p>
@@ -68,10 +70,10 @@ export const Landing: React.FC = () => {
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
                 <DeviceLaptop className="w-8 h-8 text-blue-600" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+              <h3 className="text-2xl font-semibold font-heading text-gray-900 mb-4">
                 3D Visualization
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed font-mono">
                 Experience your design in immersive 3D with realistic lighting
                 and textures
               </p>
@@ -81,10 +83,10 @@ export const Landing: React.FC = () => {
               <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
                 <Palette className="w-8 h-8 text-purple-600" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+              <h3 className="text-2xl font-semibold font-heading text-gray-900 mb-4">
                 Easy Customization
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed font-mono">
                 Personalize every detail with our intuitive design tools and
                 controls
               </p>
@@ -94,10 +96,10 @@ export const Landing: React.FC = () => {
               <div className="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6">
                 <Share2 className="w-8 h-8 text-pink-600" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+              <h3 className="text-2xl font-semibold font-heading text-gray-900 mb-4">
                 Share & Collaborate
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed font-mono">
                 Share your designs and get feedback from friends and
                 professionals
               </p>
@@ -106,15 +108,15 @@ export const Landing: React.FC = () => {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="py-24 bg-blue-600">
+      {/* Ready to Transform Section */}
+      <div className="py-12 bg-cyan-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-8">
+          <h2 className="text-4xl font-bold font-heading text-white mb-8">
             Ready to Transform Your Space?
           </h2>
           <Link
             to="/login"
-            className="inline-flex items-center px-8 py-4 text-lg font-semibold text-blue-600 bg-white rounded-full hover:bg-gray-50 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center px-8 py-4 text-lg font-semibold font-mono text-cyan-600 bg-white rounded-full hover:bg-gray-50 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
             Get Started Now <ArrowRight className="ml-2" />
           </Link>
@@ -122,15 +124,15 @@ export const Landing: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-16">
+      <footer className="bg-gray-900 text-gray-400 pt-8 pb-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">iFurnish</h2>
-            <p className="text-lg mb-8">
+            <h2 className="text-3xl font-bold font-logo text-white mb-1">Concept.Store</h2>
+            <p className="text-lg mb-8 font-mono">
               Design your perfect space with confidence
             </p>
-            <div className="text-sm">
-              © {new Date().getFullYear()} iFurnish. All rights reserved.
+            <div className="text-sm font-mono">
+              © {new Date().getFullYear()} Concept.Store. All rights reserved.
             </div>
           </div>
         </div>

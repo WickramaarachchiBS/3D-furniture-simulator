@@ -12,8 +12,8 @@ export const RoomEditor2D: React.FC = () => {
     updateFurniture,
   } = useAppState();
 
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, z: 0 });
+  const isDraggingRef = useRef(false);
+  const dragOffsetRef = useRef({ x: 0, z: 0 });
   const [scale, setScale] = useState(0.5);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
@@ -132,54 +132,23 @@ export const RoomEditor2D: React.FC = () => {
       const isSelected = item.id === selectedFurnitureId;
       const pos = coordsTo2D(item.position.x, item.position.z);
 
-      let width, depth;
       const template = defaultFurniture.find((f) => f.type === item.type);
 
-      switch (item.type) {
-        case "sofa":
-          width = 80 * item.scale.x;
-          depth = 30 * item.scale.z;
-          break;
-        case "chair":
-          width = 40 * item.scale.x;
-          depth = 40 * item.scale.z;
-          break;
-        case "coffee_table":
-          width = 60 * item.scale.x;
-          depth = 60 * item.scale.z;
-          break;
-        case "bookshelf":
-          width = 80 * item.scale.x;
-          depth = 30 * item.scale.z;
-          break;
-        case "plant":
-          width = 40 * item.scale.x;
-          depth = 40 * item.scale.z;
-          break;
-        case "wardrobe":
-          width = 100 * item.scale.x;
-          depth = 50 * item.scale.z;
-          break;
-        case "rug":
-          width = 120 * item.scale.x;
-          depth = 180 * item.scale.z;
-          break;
-        case "bed":
-          width = 140 * item.scale.x;
-          depth = 200 * item.scale.z;
-          break;
-        case "dining_table":
-          width = 100 * item.scale.x;
-          depth = 100 * item.scale.z;
-          break;
-        case "lamp":
-          width = 30 * item.scale.x;
-          depth = 30 * item.scale.z;
-          break;
-        default:
-          width = 50 * item.scale.x;
-          depth = 50 * item.scale.z;
-      }
+      // Use same base dimensions as 3D (bookshelf 40, wardrobe 60, sofa 80, dining_table 60, lamp 30, others 100)
+      // so that position clamping is consistent between views
+      const width = (item.type === "lamp" ? 30 : 100) * item.scale.x;
+      const depth =
+        (item.type === "bookshelf"
+          ? 40
+          : item.type === "wardrobe"
+            ? 60
+            : item.type === "sofa"
+              ? 80
+              : item.type === "dining_table"
+                ? 60
+                : item.type === "lamp"
+                  ? 30
+                  : 100) * item.scale.z;
 
       context.save();
       context.translate(pos.x, pos.y);
@@ -242,52 +211,20 @@ export const RoomEditor2D: React.FC = () => {
       for (let i = furniture.length - 1; i >= 0; i--) {
         const item = furniture[i];
 
-        let width, depth;
-        switch (item.type) {
-          case "sofa":
-            width = 80 * item.scale.x;
-            depth = 30 * item.scale.z;
-            break;
-          case "chair":
-            width = 40 * item.scale.x;
-            depth = 40 * item.scale.z;
-            break;
-          case "coffee_table":
-            width = 60 * item.scale.x;
-            depth = 60 * item.scale.z;
-            break;
-          case "bookshelf":
-            width = 80 * item.scale.x;
-            depth = 30 * item.scale.z;
-            break;
-          case "plant":
-            width = 40 * item.scale.x;
-            depth = 40 * item.scale.z;
-            break;
-          case "wardrobe":
-            width = 100 * item.scale.x;
-            depth = 50 * item.scale.z;
-            break;
-          case "rug":
-            width = 120 * item.scale.x;
-            depth = 180 * item.scale.z;
-            break;
-          case "bed":
-            width = 140 * item.scale.x;
-            depth = 200 * item.scale.z;
-            break;
-          case "dining_table":
-            width = 100 * item.scale.x;
-            depth = 100 * item.scale.z;
-            break;
-          case "lamp":
-            width = 30 * item.scale.x;
-            depth = 30 * item.scale.z;
-            break;
-          default:
-            width = 50 * item.scale.x;
-            depth = 50 * item.scale.z;
-        }
+        // Same base dimensions as 3D
+        const width = (item.type === "lamp" ? 30 : 100) * item.scale.x;
+        const depth =
+          (item.type === "bookshelf"
+            ? 40
+            : item.type === "wardrobe"
+              ? 60
+              : item.type === "sofa"
+                ? 80
+                : item.type === "dining_table"
+                  ? 60
+                  : item.type === "lamp"
+                    ? 30
+                    : 100) * item.scale.z;
 
         const halfWidth = width / 2;
         const halfDepth = depth / 2;
@@ -320,41 +257,19 @@ export const RoomEditor2D: React.FC = () => {
       );
       if (!selectedItem) return false;
 
-      let depth;
-      switch (selectedItem.type) {
-        case "sofa":
-          depth = 30 * selectedItem.scale.z;
-          break;
-        case "chair":
-          depth = 40 * selectedItem.scale.z;
-          break;
-        case "coffee_table":
-          depth = 60 * selectedItem.scale.z;
-          break;
-        case "bookshelf":
-          depth = 30 * selectedItem.scale.z;
-          break;
-        case "plant":
-          depth = 40 * selectedItem.scale.z;
-          break;
-        case "wardrobe":
-          depth = 50 * selectedItem.scale.z;
-          break;
-        case "rug":
-          depth = 180 * selectedItem.scale.z;
-          break;
-        case "bed":
-          depth = 200 * selectedItem.scale.z;
-          break;
-        case "dining_table":
-          depth = 100 * selectedItem.scale.z;
-          break;
-        case "lamp":
-          depth = 30 * selectedItem.scale.z;
-          break;
-        default:
-          depth = 50 * selectedItem.scale.z;
-      }
+      // Same base depth as 3D
+      const depth =
+        (selectedItem.type === "bookshelf"
+          ? 40
+          : selectedItem.type === "wardrobe"
+            ? 60
+            : selectedItem.type === "sofa"
+              ? 80
+              : selectedItem.type === "dining_table"
+                ? 60
+                : selectedItem.type === "lamp"
+                  ? 30
+                  : 100) * selectedItem.scale.z;
 
       const pos = {
         x: offset.x + (selectedItem.position.x + room.width / 2) * scale,
@@ -390,13 +305,13 @@ export const RoomEditor2D: React.FC = () => {
 
       if (clickedFurniture) {
         selectFurniture(clickedFurniture.id);
-        setIsDragging(true);
+        isDraggingRef.current = true;
 
         const roomCoords = canvasToRoomCoords(x, y);
-        setDragOffset({
+        dragOffsetRef.current = {
           x: clickedFurniture.position.x - roomCoords.x,
           z: clickedFurniture.position.z - roomCoords.z,
-        });
+        };
       } else {
         selectFurniture(null);
       }
@@ -427,17 +342,53 @@ export const RoomEditor2D: React.FC = () => {
         return;
       }
 
-      if (isDragging && selectedFurnitureId) {
+      if (isDraggingRef.current && selectedFurnitureId) {
         const roomCoords = canvasToRoomCoords(x, y);
 
-        const newX = roomCoords.x + dragOffset.x;
-        const newZ = roomCoords.z + dragOffset.z;
+        const newX = roomCoords.x + dragOffsetRef.current.x;
+        const newZ = roomCoords.z + dragOffsetRef.current.z;
+
+        const draggedItem = furniture.find(
+          (item) => item.id === selectedFurnitureId,
+        );
+        // Same base dimensions as 3D boundary check (margin=2 matches 3D)
+        const margin = 2;
+        let halfW = 50;
+        let halfD = 50;
+        if (draggedItem) {
+          halfW =
+            ((draggedItem.type === "lamp" ? 30 : 100) * draggedItem.scale.x) /
+            2;
+          halfD =
+            ((draggedItem.type === "bookshelf"
+              ? 40
+              : draggedItem.type === "wardrobe"
+                ? 60
+                : draggedItem.type === "sofa"
+                  ? 80
+                  : draggedItem.type === "dining_table"
+                    ? 60
+                    : draggedItem.type === "lamp"
+                      ? 30
+                      : 100) *
+              draggedItem.scale.z) /
+            2;
+        }
+
+        const clampedX = Math.max(
+          -room.width / 2 + halfW + margin,
+          Math.min(room.width / 2 - halfW - margin, newX),
+        );
+        const clampedZ = Math.max(
+          -room.length / 2 + halfD + margin,
+          Math.min(room.length / 2 - halfD - margin, newZ),
+        );
 
         updateFurniture(selectedFurnitureId, {
           position: {
-            x: newX,
+            x: clampedX,
             y: 0,
-            z: newZ,
+            z: clampedZ,
           },
         });
       } else {
@@ -452,7 +403,7 @@ export const RoomEditor2D: React.FC = () => {
     };
 
     const handleMouseUp = () => {
-      setIsDragging(false);
+      isDraggingRef.current = false;
       isRotating = false;
       canvas.style.cursor = "default";
     };

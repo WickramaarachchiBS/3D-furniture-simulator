@@ -1,39 +1,35 @@
-import React, { useState } from 'react';
-import { Save, Loader2, Trash2, Download, LogOut } from 'lucide-react';
-import { useAppState } from '../store/StateProvider';
-import { useAuth } from '../store/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Save, Loader2, Trash2, Download, LogOut, Home } from "lucide-react";
+import { useAppState } from "../store/StateProvider";
+import { useAuth } from "../store/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export const Header: React.FC = () => {
-  const { 
-    currentLayoutId, 
-    saveCurrentLayout, 
-    savedLayouts,
-    deleteLayout
-  } = useAppState();
-  
+  const { currentLayoutId, saveCurrentLayout, savedLayouts, deleteLayout } =
+    useAppState();
+
   const { logout } = useAuth();
   const navigate = useNavigate();
-  
-  const [layoutName, setLayoutName] = useState('');
+
+  const [layoutName, setLayoutName] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleSave = () => {
     if (!layoutName.trim()) return;
-    
+
     setIsSaving(true);
     // Simulate a brief delay for saving
     setTimeout(() => {
       saveCurrentLayout(layoutName);
-      setLayoutName('');
+      setLayoutName("");
       setIsSaving(false);
     }, 500);
   };
 
   const handleDelete = () => {
     if (!currentLayoutId) return;
-    
+
     setIsDeleting(true);
     // Simulate a brief delay for deleting
     setTimeout(() => {
@@ -44,17 +40,19 @@ export const Header: React.FC = () => {
 
   const handleSignOut = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   const exportLayout = () => {
     if (!currentLayoutId) return;
-    
-    const layout = savedLayouts.find(l => l.id === currentLayoutId);
+
+    const layout = savedLayouts.find((l) => l.id === currentLayoutId);
     if (!layout) return;
-    
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(layout));
-    const downloadAnchorNode = document.createElement('a');
+
+    const dataStr =
+      "data:text/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify(layout));
+    const downloadAnchorNode = document.createElement("a");
     downloadAnchorNode.setAttribute("href", dataStr);
     downloadAnchorNode.setAttribute("download", `${layout.name}.json`);
     document.body.appendChild(downloadAnchorNode);
@@ -62,22 +60,34 @@ export const Header: React.FC = () => {
     downloadAnchorNode.remove();
   };
 
-  const currentLayout = currentLayoutId 
-    ? savedLayouts.find(l => l.id === currentLayoutId)
+  const currentLayout = currentLayoutId
+    ? savedLayouts.find((l) => l.id === currentLayoutId)
     : null;
 
   return (
-    <header className="glass-panel z-50 sticky top-0...">
-      <div className="flex items-center space-x-2">
-        <h1 className="text-xl font-semibold text-gray-800">Furniture Room Designer</h1>
-        {currentLayout && (
-          <span className="text-sm text-gray-500">
-            - {currentLayout.name}
-          </span>
-        )}
+    <header className="glass-panel z-50 sticky top-0 flex items-center justify-between px-4 py-2">
+      {/* Left — Home button */}
+      <div className="flex items-center">
+        <button
+          onClick={() => navigate("/")}
+          className="text-gray-700 border border-gray-300 rounded-md px-3 py-1.5 text-sm font-medium flex items-center space-x-1 hover:bg-gray-50 transition-colors"
+        >
+          <Home size={16} />
+          <span>Home</span>
+        </button>
       </div>
-      
+
+      {/* Centre — layout name, save, delete, export */}
       <div className="flex items-center space-x-3">
+        <h1 className="text-xl font-semibold text-gray-800">
+          Furniture Room Designer
+          {currentLayout && (
+            <span className="text-sm text-gray-500 font-normal ml-2">
+              — {currentLayout.name}
+            </span>
+          )}
+        </h1>
+
         <input
           type="text"
           placeholder="Layout name"
@@ -85,7 +95,7 @@ export const Header: React.FC = () => {
           value={layoutName}
           onChange={(e) => setLayoutName(e.target.value)}
         />
-        
+
         <button
           onClick={handleSave}
           disabled={isSaving || !layoutName.trim()}
@@ -103,7 +113,7 @@ export const Header: React.FC = () => {
             </>
           )}
         </button>
-        
+
         {currentLayoutId && (
           <>
             <button
@@ -123,7 +133,7 @@ export const Header: React.FC = () => {
                 </>
               )}
             </button>
-            
+
             <button
               onClick={exportLayout}
               className="text-gray-700 border border-gray-300 rounded-md px-3 py-1.5 text-sm font-medium flex items-center space-x-1 hover:bg-gray-50 transition-colors"
@@ -133,9 +143,10 @@ export const Header: React.FC = () => {
             </button>
           </>
         )}
+      </div>
 
-        <div className="h-8 border-l border-gray-200 mx-2"></div>
-
+      {/* Right — Sign Out */}
+      <div className="flex items-center">
         <button
           onClick={handleSignOut}
           className="text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-md px-3 py-1.5 text-sm font-medium flex items-center space-x-1 transition-colors"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Trash2, RotateCcw, Maximize2 } from "lucide-react";
 import { useAppState } from "../../store/StateProvider";
 
@@ -12,6 +12,30 @@ export const FurnitureControls: React.FC = () => {
   } = useAppState();
 
   const selected = furniture.find((f) => f.id === selectedFurnitureId);
+
+  const handleDelete = () => {
+    if (!selected) return;
+    deleteFurniture(selected.id);
+    selectFurniture(null);
+  };
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (
+        (e.key === "Delete" || e.key === "Backspace") &&
+        selectedFurnitureId !== null &&
+        (e.target as HTMLElement).tagName !== "INPUT" &&
+        (e.target as HTMLElement).tagName !== "TEXTAREA"
+      ) {
+        e.preventDefault();
+        handleDelete();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedFurnitureId, selected]);
+
   if (!selected) return null;
 
   const handleRotate = (delta: number) => {
@@ -23,11 +47,6 @@ export const FurnitureControls: React.FC = () => {
   const handleScale = (delta: number) => {
     const next = Math.max(0.1, selected.scale.x + delta);
     updateFurniture(selected.id, { scale: { x: next, y: next, z: next } });
-  };
-
-  const handleDelete = () => {
-    deleteFurniture(selected.id);
-    selectFurniture(null);
   };
 
   return (
@@ -92,7 +111,7 @@ export const FurnitureControls: React.FC = () => {
       <button
         onClick={handleDelete}
         className="p-1.5 rounded hover:bg-red-50 text-red-500"
-        title="Delete"
+        title="Delete (Del)"
       >
         <Trash2 size={16} />
       </button>
