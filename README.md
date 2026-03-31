@@ -308,7 +308,7 @@ npm run build
 <sub>Full Stack Developer (3D Engine)</sub>
 </td>
 <td align="center" width="120">
-<a href="#">
+<a href="https://github.com/JayaweeraHRK">
 <img src="https://ui-avatars.com/api/?name=Rashmila+Jayaweera&background=random" width="80px" alt="Rashmila Jayaweera" style="border-radius: 50%"/>
 <br />
 <sub><b>Rashmila Jayaweera</b></sub>
